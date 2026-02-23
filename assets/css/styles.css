@@ -276,7 +276,7 @@ h1 {
   box-shadow: var(--shadow);
   overflow: hidden;
   position: relative;
-  transform: scale(1.25);
+  transform: scale(clamp(1, 0.75 + 0.5vw, 1.25));
   transform-origin: center center;
 }
 
