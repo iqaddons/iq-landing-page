@@ -143,3 +143,28 @@
       window.addEventListener("resize", init);
       init();
     })();
+
+    (function() {
+      const videos = document.querySelectorAll(".preview-video");
+      if (videos.length < 2) return;
+
+      let current = 0;
+
+      function switchVideo() {
+        const next = (current + 1) % videos.length;
+        videos[current].classList.remove("active");
+        videos[current].pause();
+        videos[next].classList.add("active");
+        videos[next].currentTime = 0;
+        videos[next].play();
+        current = next;
+      }
+
+      // Remove loop so 'ended' fires, then switch on end
+      videos.forEach(v => {
+        v.loop = false;
+        v.addEventListener("ended", switchVideo);
+      });
+
+      videos[0].play();
+    })();
